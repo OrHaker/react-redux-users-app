@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 import AlertboxModal from "../Components/AlertModal";
+
+import { Visibility, VisibilityOff } from "@material-ui/icons/";
+import { IconButton, InputAdornment, InputLabel } from "@material-ui/core/";
+import { FormControl, Input, Button, TextField } from "@material-ui/core/";
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -10,6 +12,7 @@ export default class LoginForm extends Component {
       user: { email: "", password: "" },
       validate: { email: true, password: true },
       missingFields: false,
+      showPassword: false,
     };
   }
 
@@ -76,6 +79,7 @@ export default class LoginForm extends Component {
     return (
       <>
         <form className="login-form" onSubmit={this.handlerSubmit}>
+          {/* Email input div*/}
           <div className="form-group">
             <TextField
               id="standard-basic"
@@ -83,7 +87,7 @@ export default class LoginForm extends Component {
               onChange={(e) => this.changeUser("email", e.target.value)}
               value={this.state.user.email}
               type="email"
-              className="form-control"
+              className="form-control my-3"
               aria-describedby="emailHelp"
               placeholder="Enter email"
               style={{ width: "50%" }}
@@ -91,18 +95,40 @@ export default class LoginForm extends Component {
             {/* alertBox */}
             {!this.state.validate.email && this.alertBox("email")}
           </div>
+          {/* Password input div*/}
           <div className="form-group">
-            <TextField
-              id="standard-password-input"
-              label="Password"
-              type="password"
-              autoComplete="current-password"
-              onChange={(e) => this.changeUser("password", e.target.value)}
-              value={this.state.user.password}
-              placeholder="Password"
-              className="form-control"
-              style={{ width: "50%" }}
-            />
+            <FormControl style={{ width: "50%" }} className="my-3">
+              <InputLabel htmlFor="standard-adornment-password">
+                Password
+              </InputLabel>
+              <Input
+                id="standard-adornment-password"
+                type={this.state.showPassword ? "text" : "password"}
+                value={this.state.user.password}
+                onChange={(e) => this.changeUser("password", e.target.value)}
+                placeholder="Password"
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      style={{ outline: "none" }}
+                      aria-label="toggle password visibility"
+                      onClick={() => {
+                        this.setState({
+                          showPassword: !this.state.showPassword,
+                        });
+                      }}
+                    >
+                      {!this.state.showPassword ? (
+                        <Visibility />
+                      ) : (
+                        <VisibilityOff />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+
             {/* alertBox */}
             {!this.state.validate.password && this.alertBox("password")}
           </div>

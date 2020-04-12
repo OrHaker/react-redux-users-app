@@ -34,7 +34,6 @@ function Navbar(props) {
       },
     },
     toolbarButtonLogin: {
-      marginLeft: "65%",
       position: "relative",
       "&:hover": {
         color: "#ffffff",
@@ -44,7 +43,6 @@ function Navbar(props) {
     toolbarButtonLogout: {
       color: "rgba(255, 71, 71, 0.521)",
       position: "relative",
-      marginLeft: "65%",
       fontSize: 20,
       "&:hover": {
         color: "rgba(255, 0, 0, 0.750)",
@@ -58,7 +56,7 @@ function Navbar(props) {
     <>
       <AppBar
         position="static"
-        style={{ background: "#2E3B55", marginBottom: 30 }}
+        style={{ background: "#2E3B55", marginBottom: 30, width: "100%" }}
       >
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
